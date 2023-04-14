@@ -36,3 +36,5 @@ def test_reading_plan_group_news(mock_db_news_proxy):
     assert len(result["unreadable"]) == 1
     if len(result["readable"]) > 0:
         assert result["readable"][0]["unfilled_time"] == 26
+
+        

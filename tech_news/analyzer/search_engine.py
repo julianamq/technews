@@ -1,4 +1,7 @@
 from tech_news.database import search_news
+from tech_news.database import find_news
+from datetime import datetime
+from typing import Dict, List
 
 
 # Requisito 7
@@ -8,8 +11,19 @@ def search_by_title(title):
 
 
 # Requisito 8
-def search_by_date(date):
-    """Seu código deve vir aqui"""
+def search_by_date(date: str) -> List[Dict[str, str]]:
+    try:
+        formatted_date = datetime.strptime(date, "%Y-%m-%d").strftime(
+            "%d/%m/%Y"
+        )
+    except ValueError:
+        raise ValueError("Data inválida")
+
+    result = []
+    for new in find_news():
+        if new["timestamp"] == formatted_date:
+            result.append(new)
+    return result
 
 
 # Requisito 9
